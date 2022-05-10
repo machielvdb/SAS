@@ -39,7 +39,7 @@ namespace SAS_WPF.Windows
         private void btnAddDrink_Click(object sender, RoutedEventArgs e)
         {
             // Opens the AddItem window with a true parameter to specify it's a drink.
-            var w = new AddItem(true);
+            var w = new AddItem();
             w.Show();
         }
 
@@ -54,6 +54,7 @@ namespace SAS_WPF.Windows
                     if (drink.ID == selectedDrink.ID)
                     {
                         ctx.Drinks.Remove(drink);
+                        ctx.SaveChanges();
                     }
                 }
             }

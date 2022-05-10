@@ -22,9 +22,9 @@ namespace SAS_WPF
     
         public System.Guid ID { get; set; }
         public int Amount { get; set; }
-        public Nullable<byte> FullDay { get; set; }
+        public Nullable<bool> FullDay { get; set; }
         public System.Guid UserID { get; set; }
-        public byte WarmMeal { get; set; }
+        public bool WarmMeal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DrinkOrder> DrinkOrders { get; set; }

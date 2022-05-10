@@ -16,12 +16,10 @@ namespace SAS_WPF.Windows
 {
     public partial class AddItem : Window
     {
-        bool IsDrink = false;
-        public AddItem(bool isDrink)
+        public AddItem()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            IsDrink = isDrink;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

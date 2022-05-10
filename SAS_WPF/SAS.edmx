@@ -45,9 +45,9 @@
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Amount" Type="int" Nullable="false" />
-    <Property Name="FullDay" Type="tinyint" Nullable="true" />
+    <Property Name="FullDay" Type="bit" Nullable="true" />
     <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="WarmMeal" Type="tinyint" Nullable="false" />
+    <Property Name="WarmMeal" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -125,11 +125,11 @@
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="FullDay" Type="Byte" />
+          <Property Name="FullDay" Type="Boolean" />
           <Property Name="UserID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="DrinkOrders" Relationship="Self.FK_DrinkOrder_Order" FromRole="Orders" ToRole="DrinkOrders" />
           <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Orders" ToRole="Users" />
-          <Property Name="WarmMeal" Type="Byte" Nullable="false" />
+          <Property Name="WarmMeal" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
