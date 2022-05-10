@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SASModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SASModelStoreContainer">
+    <EntitySet Name="DrinkOrders" EntityType="SASModel.Store.DrinkOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Drinks" EntityType="SASModel.Store.Drinks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="SASModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SASModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_DrinkOrder_Drink" Association="SASModel.Store.FK_DrinkOrder_Drink">
+      <End Role="Drinks" EntitySet="Drinks" />
+      <End Role="DrinkOrders" EntitySet="DrinkOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DrinkOrder_Order" Association="SASModel.Store.FK_DrinkOrder_Order">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="DrinkOrders" EntitySet="DrinkOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_User" Association="SASModel.Store.FK_Order_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DrinkOrders">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DrinkID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Drinks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsBlocked" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="FullDay" Type="tinyint" Nullable="true" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="WarmMeal" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UID" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Pincode" Type="int" Nullable="true" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="IsBlocked" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DrinkOrder_Drink">
+    <End Role="Drinks" Type="SASModel.Store.Drinks" Multiplicity="1" />
+    <End Role="DrinkOrders" Type="SASModel.Store.DrinkOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drinks">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DrinkOrders">
+        <PropertyRef Name="DrinkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DrinkOrder_Order">
+    <End Role="Orders" Type="SASModel.Store.Orders" Multiplicity="1" />
+    <End Role="DrinkOrders" Type="SASModel.Store.DrinkOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DrinkOrders">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_User">
+    <End Role="Users" Type="SASModel.Store.Users" Multiplicity="1" />
+    <End Role="Orders" Type="SASModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DrinkOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Nullable="false" Type="Guid" />
+          <Property Name="DrinkID" Nullable="false" Type="Guid" />
+          <Property Name="OrderID" Nullable="false" Type="Guid" />
+          <NavigationProperty Name="Drink" Relationship="Self.FK_DrinkOrder_Drink" FromRole="DrinkOrders" ToRole="Drinks" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_DrinkOrder_Order" FromRole="DrinkOrders" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Drink">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DrinkOrders" Relationship="Self.FK_DrinkOrder_Drink" FromRole="Drinks" ToRole="DrinkOrders" />
+          <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="FullDay" Type="Byte" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="DrinkOrders" Relationship="Self.FK_DrinkOrder_Order" FromRole="Orders" ToRole="DrinkOrders" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Orders" ToRole="Users" />
+          <Property Name="WarmMeal" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pincode" Type="Int32" />
+          <Property Name="Admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User" FromRole="Users" ToRole="Orders" />
+          <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DrinkOrder_Drink">
+          <End Type="Self.Drink" Multiplicity="1" Role="Drinks" />
+          <End Type="Self.DrinkOrder" Multiplicity="*" Role="DrinkOrders" />
+          <ReferentialConstraint>
+            <Principal Role="Drinks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrinkOrders">
+              <PropertyRef Name="DrinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DrinkOrder_Order">
+          <End Type="Self.Order" Multiplicity="1" Role="Orders" />
+          <End Type="Self.DrinkOrder" Multiplicity="*" Role="DrinkOrders" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DrinkOrders">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SAS" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DrinkOrders" EntityType="Self.DrinkOrder" />
+          <EntitySet Name="Drinks" EntityType="Self.Drink" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_DrinkOrder_Drink" Association="Self.FK_DrinkOrder_Drink">
+            <End EntitySet="Drinks" Role="Drinks" />
+            <End EntitySet="DrinkOrders" Role="DrinkOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DrinkOrder_Order" Association="Self.FK_DrinkOrder_Order">
+            <End EntitySet="Orders" Role="Orders" />
+            <End EntitySet="DrinkOrders" Role="DrinkOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SASModelStoreContainer" CdmEntityContainer="SAS">
+    <EntitySetMapping Name="DrinkOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(SASModel.DrinkOrder)">
+        <MappingFragment StoreEntitySet="DrinkOrders">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DrinkID" ColumnName="DrinkID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Drinks">
+      <EntityTypeMapping TypeName="IsTypeOf(SASModel.Drink)">
+        <MappingFragment StoreEntitySet="Drinks">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(SASModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="FullDay" ColumnName="FullDay" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="WarmMeal" ColumnName="WarmMeal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(SASModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
