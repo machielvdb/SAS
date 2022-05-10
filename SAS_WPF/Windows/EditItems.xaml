@@ -6,14 +6,16 @@
         xmlns:local="clr-namespace:SAS_WPF.Windows"
         mc:Ignorable="d"
         Title="EditItems" Height="259" Width="377">
-    <Grid Margin="0,0,10,6">
+    <Grid Margin="0,0,10,6" DataContextChanged="Grid_DataContextChanged">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="270*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnAddDrink" Content="Drankje toevoegen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Height="71" Click="btnAddDrink_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnDeleteSelection" Content="Verwijder geselecteerd item" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="186" Height="71" Grid.ColumnSpan="2" Click="btnDeleteSelection_Click"/>
-        <ListBox x:Name="lbDrinks" HorizontalAlignment="Left" Height="223" Margin="201,10,0,0" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAddDrink" Content="Drankje toevoegen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Height="71" Click="btnAddDrink_Click" Grid.ColumnSpan="4"/>
+        <Button x:Name="btnDeleteSelection" Content="Verwijder geselecteerd item" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="186" Height="71" Grid.ColumnSpan="4" Click="btnDeleteSelection_Click"/>
+        <ListBox x:Name="lbDrinks" HorizontalAlignment="Left" Height="223" Margin="104,10,0,0" VerticalAlignment="Top" Width="163" Grid.Column="3"/>
 
     </Grid>
 </Window>

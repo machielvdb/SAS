@@ -108,7 +108,7 @@ namespace SAS_WPF.Windows
         private void btnAdminChecked(object sender, RoutedEventArgs e)
         {
             tbPincode.IsEnabled = true;
-            tbPincode.Text = "Pincode";
+            tbPincode.Text = "";
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

@@ -47,6 +47,16 @@ namespace SAS_WPF.Windows
                     cbDrink2.Items.Add(drink);
                 }
 
+                cbDrink1.DataContext = null;
+                cbDrink1.DisplayMemberPath = "Name";
+                cbDrink1.SelectedValuePath = "ID";
+                cbDrink1.DataContext = new List<Drink>();
+
+                cbDrink2.DataContext = null;
+                cbDrink2.DisplayMemberPath = "Name";
+                cbDrink2.SelectedValuePath = "ID";
+                cbDrink2.DataContext = new List<Drink>();
+
                 if (selectedUser.Admin)
                 {
                     btnAdmin.Visibility = Visibility.Visible;
