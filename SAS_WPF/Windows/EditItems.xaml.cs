@@ -30,7 +30,6 @@ namespace SAS_WPF.Windows
 
         private void btnAddDrink_Click(object sender, RoutedEventArgs e)
         {
-            // Opens the AddItem window with a true parameter to specify it's a drink.
             var w = new AddItem();
             w.ShowDialog();
             RefreshList();
@@ -38,6 +37,12 @@ namespace SAS_WPF.Windows
 
         private void btnDeleteSelection_Click(object sender, RoutedEventArgs e)
         {
+            if (lbDrinks.SelectedItem is null)
+            {
+                MessageBox.Show("Gelieve een drankje te selecteren.");
+                return;
+            }
+
             var selectedDrink = lbDrinks.SelectedItem as Drink;
             var drinkorderExists = false;
 
@@ -76,7 +81,6 @@ namespace SAS_WPF.Windows
                         if (drink.ID == selectedDrink.ID)
                         {
                             ctx.Drinks.Remove(drink);
-                            ctx.SaveChanges();
                         }
                     }
                 }
