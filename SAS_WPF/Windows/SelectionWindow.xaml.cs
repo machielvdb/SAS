@@ -17,11 +17,13 @@ namespace SAS_WPF.Windows
     public partial class SelectionWindow : Window
     {
         private string savedUID;
-        public SelectionWindow(string uid)
+        private DateTime ScanTime;
+        public SelectionWindow(string uid, DateTime scanTime)
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             savedUID = uid;
+            ScanTime = scanTime;
 
             using (var ctx = new SAS())
             {

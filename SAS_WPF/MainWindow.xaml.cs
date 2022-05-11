@@ -61,7 +61,8 @@ namespace SAS_WPF
                     var User = CheckCardForUniqueUser(uid);
                     if (User)
                     {
-                        var w = new Windows.SelectionWindow(uid);
+                        DateTime scanTime = DateTime.Now;
+                        var w = new Windows.SelectionWindow(uid, scanTime);
                         w.ShowDialog();
                     }
                 }
