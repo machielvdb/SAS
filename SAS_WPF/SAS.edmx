@@ -48,6 +48,7 @@
     <Property Name="FullDay" Type="bit" Nullable="true" />
     <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="WarmMeal" Type="bit" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -130,6 +131,7 @@
           <NavigationProperty Name="DrinkOrders" Relationship="Self.FK_DrinkOrder_Order" FromRole="Orders" ToRole="DrinkOrders" />
           <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Orders" ToRole="Users" />
           <Property Name="WarmMeal" Type="Boolean" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -229,6 +231,7 @@
           <ScalarProperty Name="FullDay" ColumnName="FullDay" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="WarmMeal" ColumnName="WarmMeal" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

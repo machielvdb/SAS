@@ -45,7 +45,6 @@ namespace SAS_WPF.Windows
 
                     ctx.Drinks.Add(newDrink);
                     ctx.SaveChanges();
-                    MessageBox.Show("Item opgeslagen.");
                     this.Close();
                 }
             }

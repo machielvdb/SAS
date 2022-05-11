@@ -25,6 +25,7 @@ namespace SAS_WPF
         public Nullable<bool> FullDay { get; set; }
         public System.Guid UserID { get; set; }
         public bool WarmMeal { get; set; }
+        public System.DateTime Time { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DrinkOrder> DrinkOrders { get; set; }

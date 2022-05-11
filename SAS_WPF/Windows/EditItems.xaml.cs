@@ -30,23 +30,58 @@ namespace SAS_WPF.Windows
 
         private void btnAddDrink_Click(object sender, RoutedEventArgs e)
         {
-            // Opens the AddItem window with a true parameter to specify it's a drink.
             var w = new AddItem();
-            w.Show();
+            w.ShowDialog();
             RefreshList();
         }
 
         private void btnDeleteSelection_Click(object sender, RoutedEventArgs e)
         {
+            if (lbDrinks.SelectedItem is null)
+            {
+                MessageBox.Show("Gelieve een drankje te selecteren.");
+                return;
+            }
+
             var selectedDrink = lbDrinks.SelectedItem as Drink;
+            var drinkorderExists = false;
 
             using (var ctx = new SAS())
             {
-                foreach (var drink in ctx.Drinks)
+                foreach (var drinkorder in ctx.DrinkOrders)
                 {
-                    if (drink.ID == selectedDrink.ID)
+                    if (drinkorder.DrinkID == selectedDrink.ID)
                     {
-                        ctx.Drinks.Remove(drink);
+                        foreach (var drink in ctx.Drinks)
+                        {
+                            if (drink.ID == selectedDrink.ID)
+                            {
+                                drinkorderExists = true;
+                            }
+                        }
+                    }
+                }
+
+                if (drinkorderExists)
+                {
+                    foreach (var drink in ctx.Drinks)
+                    {
+                        if (drink.ID == selectedDrink.ID)
+                        {
+                            drink.IsBlocked = true;
+                            ctx.SaveChanges();
+                        }
+                    }
+                }
+
+                else
+                {
+                    foreach (var drink in ctx.Drinks)
+                    {
+                        if (drink.ID == selectedDrink.ID)
+                        {
+                            ctx.Drinks.Remove(drink);
+                        }
                     }
                 }
                 ctx.SaveChanges();

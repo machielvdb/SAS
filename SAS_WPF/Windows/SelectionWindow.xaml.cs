@@ -17,11 +17,13 @@ namespace SAS_WPF.Windows
     public partial class SelectionWindow : Window
     {
         private string savedUID;
-        public SelectionWindow(string uid)
+        private DateTime ScanTime;
+        public SelectionWindow(string uid, DateTime scanTime)
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             savedUID = uid;
+            ScanTime = scanTime;
 
             using (var ctx = new SAS())
             {
@@ -43,8 +45,11 @@ namespace SAS_WPF.Windows
 
                 foreach (var drink in ctx.Drinks)
                 {
-                    cbDrink1.Items.Add(drink);
-                    cbDrink2.Items.Add(drink);
+                    if (!drink.IsBlocked)
+                    {
+                        cbDrink1.Items.Add(drink);
+                        cbDrink2.Items.Add(drink);
+                    }
                 }
 
                 cbDrink1.DataContext = null;
@@ -78,36 +83,51 @@ namespace SAS_WPF.Windows
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            using (var ctx = new SAS())
+            if (cbDrink1.SelectedItem is null || cbDrink2.SelectedItem is null)
             {
-                var order = new Order();
-                var drink1 = new DrinkOrder();
-                var drink2 = new DrinkOrder();
+                MessageBox.Show("Gelieve 2 drankjes te selecteren.");
+            }
 
-                order.ID = Guid.NewGuid();
-                drink1.ID = Guid.NewGuid();
-                drink2.ID = Guid.NewGuid();
-
-                drink1.Order = order;
-                drink2.Order = order;
-
-                bool warm = (bool)checkWarm.IsChecked;
-                bool fullday = (bool)checkDay.IsChecked;
-
-                order.WarmMeal = warm;
-                order.FullDay = fullday;
-
-                var user = ctx.Users.Where(x => x.UID == savedUID).Select(x => x);
-                
-                foreach (var x in user)
+            else
+            {
+                using (var ctx = new SAS())
                 {
-                    order.UserID = x.ID;
-                }
+                    var order = new Order();
+                    var drink1 = new DrinkOrder();
+                    var drink2 = new DrinkOrder();
 
-                ctx.Orders.Add(order);
-                ctx.DrinkOrders.Add(drink1);
-                ctx.DrinkOrders.Add(drink2);
-                ctx.SaveChanges();
+                    var selectedDrink1 = cbDrink1.SelectedItem as Drink;
+                    var selectedDrink2 = cbDrink2.SelectedItem as Drink;
+
+                    drink1.DrinkID = selectedDrink1.ID;
+                    drink2.DrinkID = selectedDrink2.ID;
+
+                    order.ID = Guid.NewGuid();
+                    drink1.ID = Guid.NewGuid();
+                    drink2.ID = Guid.NewGuid();
+
+                    drink1.Order = order;
+                    drink2.Order = order;
+
+                    bool warm = (bool)checkWarm.IsChecked;
+                    bool fullday = (bool)checkDay.IsChecked;
+
+                    order.WarmMeal = warm;
+                    order.FullDay = fullday;
+                    order.Time = ScanTime;
+
+                    var users = ctx.Users.Where(x => x.UID == savedUID).Select(x => x);
+
+                    foreach (var user in users)
+                    {
+                        order.UserID = user.ID;
+                    }
+
+                    ctx.Orders.Add(order);
+                    ctx.DrinkOrders.Add(drink1);
+                    ctx.DrinkOrders.Add(drink2);
+                    ctx.SaveChanges();
+                }
             }
         }
     }
