@@ -74,9 +74,6 @@
     <Compile Include="Drink.cs">
       <DependentUpon>SAS.tt</DependentUpon>
     </Compile>
-    <Compile Include="DrinkOrder.cs">
-      <DependentUpon>SAS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Order.cs">
       <DependentUpon>SAS.tt</DependentUpon>
     </Compile>
@@ -191,6 +188,7 @@
       <DependentUpon>SAS.edmx</DependentUpon>
       <LastGenOutput>SAS.cs</LastGenOutput>
     </Content>
+    <Resource Include="Mailjob.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

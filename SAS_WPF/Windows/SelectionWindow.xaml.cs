@@ -43,6 +43,12 @@ namespace SAS_WPF.Windows
                     tbWelcome.Text = $"Welkom {selectedUser.Username}";
                 }
 
+                foreach (var drink in ctx.Drinks)
+                {
+                    cbDrink1.Items.Add(drink);
+                    cbDrink2.Items.Add(drink);
+                }
+
                 cbDrink1.DataContext = null;
                 cbDrink1.DisplayMemberPath = "Name";
                 cbDrink1.SelectedValuePath = "ID";

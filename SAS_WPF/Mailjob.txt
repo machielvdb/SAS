@@ -1,0 +1,41 @@
+﻿DECLARE
+	@sub VARCHAR(100),
+	@msg VARCHAR(250),
+	@query NVARCHAR(MAX),
+	@query_attachment_filename NVARCHAR(2000),
+	@column1name varchar(50)
+
+set @sub = 'Bestellijst'
+set @msg = 'In bijlage de bestellingen voor vandaag.'
+set @query_attachment_filename = 'Bestellijst.csv'
+
+CREATE TABLE #Bestellijst
+(
+	[Username] [varchar](50) NULL,
+	[Datum] [datetime] NULL,
+	[VolledigeDag] [bit] NULL,
+	[Warm] [bit] NULL,
+	[Drank1] [varchar](50) NULL,
+	[Drank2] [varchar](50) NULL
+)
+
+INSERT INTO #Bestellijst
+SELECT Users.Username, Orders.Time, Orders.FullDay, Orders.WarmMeal, Orders.Drink1, Orders.Drink2 FROM Orders
+INNER JOIN Users on Users.ID = Orders.UserID
+ORDER BY Orders.Time ASC
+
+SELECT @query = 'set NOCOUNT ON; SELECT * FROM #Bestellijst'
+
+EXEC msdb.dbo.sp_send_dbmail
+	@profile_name = 'CSVExport',
+	@recipients = 'machiel@vandenbussche.io',
+	@copy_recipients = '',
+	@body = @msg,
+	@query = @query,
+	@query_attachment_filename = @query_attachment_filename,
+	@attach_query_result_as_file = 1,
+	@query_result_header = 1,
+	@query_result_width = 1000,
+	@query_result_no_padding = 1
+
+DROP TABLE #Bestellijst
