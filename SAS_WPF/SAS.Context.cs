@@ -25,9 +25,8 @@ namespace SAS_WPF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DrinkOrder> DrinkOrders { get; set; }
-        public virtual DbSet<Drink> Drinks { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Drink> Drinks { get; set; }
     }
 }

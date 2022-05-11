@@ -8,7 +8,7 @@
         Title="SelectionWindow" Height="250" Width="400" WindowStyle="None" Background="#FF60717B" ResizeMode="NoResize" Foreground="White">
     <Grid Margin="0,0,2,6">
         <ComboBox x:Name="cbDrink1" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="150" Height="30" BorderThickness="0" BorderBrush="{x:Null}" Foreground="#FF0A0B0B" Background="{x:Null}"/>
-        <ComboBox x:Name="cbDrink2" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="150" Height="30" BorderBrush="{x:Null}" BorderThickness="0" Foreground="White"/>
+        <ComboBox x:Name="cbDrink2" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="150" Height="30" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF0C0B0B"/>
         <TextBlock x:Name="tbWelcome" HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-0.298,0.355" Height="45" Width="258" FontSize="24"/>
         <Button x:Name="btnAdmin" Content="Instellingen" HorizontalAlignment="Left" Margin="120,196,0,0" VerticalAlignment="Top" Width="100" Height="30" Click="btnAdmin_Click" Visibility="Hidden" Background="#FF60717B" BorderBrush="White" Foreground="White"/>
         <CheckBox x:Name="checkWarm" Content="Warme maaltijd" HorizontalAlignment="Left" Margin="264,113,0,0" VerticalAlignment="Top" Foreground="White" BorderThickness="1" BorderBrush="#7F424C52"/>

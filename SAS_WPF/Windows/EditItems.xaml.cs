@@ -44,44 +44,14 @@ namespace SAS_WPF.Windows
             }
 
             var selectedDrink = lbDrinks.SelectedItem as Drink;
-            var drinkorderExists = false;
 
             using (var ctx = new SAS())
             {
-                foreach (var drinkorder in ctx.DrinkOrders)
+                foreach (var drink in ctx.Drinks)
                 {
-                    if (drinkorder.DrinkID == selectedDrink.ID)
+                    if (drink.ID == selectedDrink.ID)
                     {
-                        foreach (var drink in ctx.Drinks)
-                        {
-                            if (drink.ID == selectedDrink.ID)
-                            {
-                                drinkorderExists = true;
-                            }
-                        }
-                    }
-                }
-
-                if (drinkorderExists)
-                {
-                    foreach (var drink in ctx.Drinks)
-                    {
-                        if (drink.ID == selectedDrink.ID)
-                        {
-                            drink.IsBlocked = true;
-                            ctx.SaveChanges();
-                        }
-                    }
-                }
-
-                else
-                {
-                    foreach (var drink in ctx.Drinks)
-                    {
-                        if (drink.ID == selectedDrink.ID)
-                        {
-                            ctx.Drinks.Remove(drink);
-                        }
+                        ctx.Drinks.Remove(drink);
                     }
                 }
                 ctx.SaveChanges();

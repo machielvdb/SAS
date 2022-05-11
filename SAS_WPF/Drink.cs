@@ -14,17 +14,7 @@ namespace SAS_WPF
     
     public partial class Drink
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Drink()
-        {
-            this.DrinkOrders = new HashSet<DrinkOrder>();
-        }
-    
         public System.Guid ID { get; set; }
         public string Name { get; set; }
-        public bool IsBlocked { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DrinkOrder> DrinkOrders { get; set; }
     }
 }

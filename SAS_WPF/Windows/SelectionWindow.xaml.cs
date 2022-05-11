@@ -43,15 +43,6 @@ namespace SAS_WPF.Windows
                     tbWelcome.Text = $"Welkom {selectedUser.Username}";
                 }
 
-                foreach (var drink in ctx.Drinks)
-                {
-                    if (!drink.IsBlocked)
-                    {
-                        cbDrink1.Items.Add(drink);
-                        cbDrink2.Items.Add(drink);
-                    }
-                }
-
                 cbDrink1.DataContext = null;
                 cbDrink1.DisplayMemberPath = "Name";
                 cbDrink1.SelectedValuePath = "ID";
@@ -87,21 +78,14 @@ namespace SAS_WPF.Windows
                 using (var ctx = new SAS())
                 {
                     var order = new Order();
-                    var drink1 = new DrinkOrder();
-                    var drink2 = new DrinkOrder();
 
                     var selectedDrink1 = cbDrink1.SelectedItem as Drink;
                     var selectedDrink2 = cbDrink2.SelectedItem as Drink;
 
-                    drink1.DrinkID = selectedDrink1.ID;
-                    drink2.DrinkID = selectedDrink2.ID;
-
                     order.ID = Guid.NewGuid();
-                    drink1.ID = Guid.NewGuid();
-                    drink2.ID = Guid.NewGuid();
 
-                    drink1.OrderID = order.ID;
-                    drink2.OrderID = order.ID;
+                    order.Drink1 = selectedDrink1.Name;
+                    order.Drink2 = selectedDrink2.Name;
 
                     order.WarmMeal = (bool)checkWarm.IsChecked;
                     order.FullDay = (bool)checkDay.IsChecked;
@@ -115,8 +99,6 @@ namespace SAS_WPF.Windows
                     }
 
                     ctx.Orders.Add(order);
-                    ctx.DrinkOrders.Add(drink1);
-                    ctx.DrinkOrders.Add(drink2);
                     ctx.SaveChanges();
                     MessageBox.Show("Bestelling doorgegeven.");
                     Close();
