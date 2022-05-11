@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/10/2022 21:51:21
--- Generated from EDMX file: C:\Users\Machiel\source\repos\SAS_WPF\SAS_WPF\SAS.edmx
+-- Date Created: 05/11/2022 18:39:46
+-- Generated from EDMX file: C:\Users\Machiel\source\repos\SAS\SAS_WPF\SAS.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -70,7 +70,8 @@ CREATE TABLE [dbo].[Orders] (
     [Amount] int  NOT NULL,
     [FullDay] bit  NULL,
     [UserID] uniqueidentifier  NOT NULL,
-    [WarmMeal] bit  NOT NULL
+    [WarmMeal] bit  NOT NULL,
+    [Time] datetime  NOT NULL
 );
 GO
 
