@@ -69,12 +69,6 @@ namespace SAS_WPF.Windows
             }
         }
 
-        public SelectionWindow()
-        {
-            InitializeComponent();
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        }
-
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
             var w = new Windows.EditItems();
@@ -106,14 +100,11 @@ namespace SAS_WPF.Windows
                     drink1.ID = Guid.NewGuid();
                     drink2.ID = Guid.NewGuid();
 
-                    drink1.Order = order;
-                    drink2.Order = order;
+                    drink1.OrderID = order.ID;
+                    drink2.OrderID = order.ID;
 
-                    bool warm = (bool)checkWarm.IsChecked;
-                    bool fullday = (bool)checkDay.IsChecked;
-
-                    order.WarmMeal = warm;
-                    order.FullDay = fullday;
+                    order.WarmMeal = (bool)checkWarm.IsChecked;
+                    order.FullDay = (bool)checkDay.IsChecked;
                     order.Time = ScanTime;
 
                     var users = ctx.Users.Where(x => x.UID == savedUID).Select(x => x);
@@ -127,6 +118,8 @@ namespace SAS_WPF.Windows
                     ctx.DrinkOrders.Add(drink1);
                     ctx.DrinkOrders.Add(drink2);
                     ctx.SaveChanges();
+                    MessageBox.Show("Bestelling doorgegeven.");
+                    Close();
                 }
             }
         }

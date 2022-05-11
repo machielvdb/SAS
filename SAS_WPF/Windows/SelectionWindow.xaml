@@ -13,7 +13,7 @@
         <Button x:Name="btnAdmin" Content="Instellingen" HorizontalAlignment="Left" Margin="120,196,0,0" VerticalAlignment="Top" Width="100" Height="30" Click="btnAdmin_Click" Visibility="Hidden" Background="#FF60717B" BorderBrush="White" Foreground="White"/>
         <CheckBox x:Name="checkWarm" Content="Warme maaltijd" HorizontalAlignment="Left" Margin="264,113,0,0" VerticalAlignment="Top" Foreground="White" BorderThickness="1" BorderBrush="#7F424C52"/>
         <CheckBox x:Name="checkDay" Content="Halve dag" HorizontalAlignment="Left" Margin="264,145,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="#7F424C52"/>
-        <Button x:Name="btnSave" Content="Klaar" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF60717B" Foreground="White" BorderBrush="White"/>
+        <Button x:Name="btnSave" Content="Klaar" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF60717B" Foreground="White" BorderBrush="White" Click="btnSave_Click"/>
 
     </Grid>
 </Window>
