@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAS_WPF.Windows"
         mc:Ignorable="d"
-        Title="SelectionWindow" Height="238.705" Width="686.929">
+        Title="SelectionWindow" Height="250" Width="400" WindowStyle="None" Background="#FF60717B" ResizeMode="NoResize" Foreground="White">
     <Grid Margin="0,0,2,6">
-        <ComboBox x:Name="cbDrink1" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="258" Height="47"/>
-        <ComboBox x:Name="cbDrink2" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" Width="258" Height="47"/>
-        <TextBlock x:Name="tbWelcome" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-0.298,0.355" Height="45" Width="258"/>
-        <Button x:Name="btnAdmin" Content="Admin" HorizontalAlignment="Left" Margin="569,10,0,0" VerticalAlignment="Top" Width="94" Height="31" Click="btnAdmin_Click" Visibility="Hidden"/>
-        <CheckBox x:Name="checkWarm" Content="Warme maaltijd" HorizontalAlignment="Left" Margin="288,89,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkDay" Content="Halve dag" HorizontalAlignment="Left" Margin="288,121,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSave" Content="Opslaan" HorizontalAlignment="Left" Margin="497,112,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbDrink1" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="150" Height="30" BorderThickness="0" BorderBrush="{x:Null}" Foreground="#FF0A0B0B" Background="{x:Null}"/>
+        <ComboBox x:Name="cbDrink2" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="150" Height="30" BorderBrush="{x:Null}" BorderThickness="0" Foreground="White"/>
+        <TextBlock x:Name="tbWelcome" HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-0.298,0.355" Height="45" Width="258" FontSize="24"/>
+        <Button x:Name="btnAdmin" Content="Instellingen" HorizontalAlignment="Left" Margin="120,196,0,0" VerticalAlignment="Top" Width="100" Height="30" Click="btnAdmin_Click" Visibility="Hidden" Background="#FF60717B" BorderBrush="White" Foreground="White"/>
+        <CheckBox x:Name="checkWarm" Content="Warme maaltijd" HorizontalAlignment="Left" Margin="264,113,0,0" VerticalAlignment="Top" Foreground="White" BorderThickness="1" BorderBrush="#7F424C52"/>
+        <CheckBox x:Name="checkDay" Content="Halve dag" HorizontalAlignment="Left" Margin="264,145,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="#7F424C52"/>
+        <Button x:Name="btnSave" Content="Klaar" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF60717B" Foreground="White" BorderBrush="White"/>
 
     </Grid>
 </Window>
